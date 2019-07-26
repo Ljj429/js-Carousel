@@ -36,17 +36,18 @@ function p() {
   timer = setInterval(n, 2000);
 }
 //点击小圆点跳转至相应图片
-for (let j = 0; j < arrLeft.length; j++) {
-  lis[j].addEventListener('click', function () {
-    clearInterval(timer);
-    box.style.left = arrLeft[j] + 'px';
-    index = j;
-    for (let i = 0; i < arrLeft.length; i++) {
-      lis[i].className = '';
-    }
-    lis[index].className = 'act';
-    timer = setInterval(n, 2000);
-  });
+for (let i = 0; i < arrLeft.length; i++) {
+  (function (i) {
+    lis[i].addEventListener('click', function () {
+      clearInterval(timer);
+      box.style.left = arrLeft[i] + 'px';
+      for (let i = 0; i < arrLeft.length; i++) {
+        lis[i].className = '';
+      }
+      lis[i].className = 'act';
+      timer = setInterval(n, 2000);
+      });
+  })(i);
 }
 prev.addEventListener('click', p);
 next.addEventListener('click', n);
