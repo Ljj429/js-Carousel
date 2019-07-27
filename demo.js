@@ -1,54 +1,55 @@
-var arrLeft = [0, -720, -1440, -2160, -2880];
 var next = document.querySelector('.next');
 var prev = document.querySelector('.prev');
 var box = document.querySelector('.box');
 var lis = document.querySelectorAll('.dot li');
 var index = 0;
 var timer;
-//下一张图片
-function n() {
-  clearInterval(timer)
+arr = [0, -700, -1400, -2100];
+// 下一张
+function n() { 
+  clearInterval(timer);
   index++;
-  box.style.left = arrLeft[index] + 'px';
-  if (index >= arrLeft.length) {
+  box.style.left = arr[index] + 'px';
+  if (index >= arr.length) {
     index = 0;
-    box.style.left = arrLeft[index] + 'px';
+    box.style.left = arr[index] + 'px';
   }
-  for (var i = 0; i < arrLeft.length; i++) {
-    lis[i].className = ''
+  for ( var i = 0; i < arr.length; i++) {
+    lis[i].className = '';
   }
-  lis[index].className = 'act';
+  lis[index].className = 'current';
   timer = setInterval(n, 2000);
 }
-//上一张图片
+//上一张
 function p() {
-  clearInterval(timer)
+  clearInterval(timer);
   index--;
   if (index < 0) {
-    box.style.left = arrLeft[arrLeft.length] + 'px';
-    index = arrLeft.length - 1;
+    index = arr.length - 1;
+    box.style.left = arr[index] + 'px';
   }
-  box.style.left = arrLeft[index] + 'px';
-  for (let i = 0; i < arrLeft.length; i++) {
-    lis[i].className = ''
+  box.style.left = arr[index] + 'px';
+  for ( var i = 0; i < arr.length; i++) {
+    lis[i].className = '';
   }
-  lis[index].className = 'act';
+  lis[index].className = 'current';
   timer = setInterval(n, 2000);
 }
-//点击小圆点跳转至相应图片
-for (let i = 0; i < arrLeft.length; i++) {
-  (function (i) {
+//点击小圆点直接跳转到相应图片
+for (var i = 0; i < lis.length; i++) {
+  (function(i){ 
     lis[i].addEventListener('click', function () {
       clearInterval(timer);
-      box.style.left = arrLeft[i] + 'px';
-      for (let i = 0; i < arrLeft.length; i++) {
-        lis[i].className = '';
+      box.style.left = arr[i] + 'px';
+      for (var j = 0; j < lis.length; j++) {
+        lis[j].className = '';
       }
-      lis[i].className = 'act';
+      lis[i].className = 'current';
       timer = setInterval(n, 2000);
-      });
+    });
+    
   })(i);
 }
-prev.addEventListener('click', p);
+timer = setInterval(n, 2000);
 next.addEventListener('click', n);
-var timer = setInterval(n, 2000);
+prev.addEventListener('click', p);
